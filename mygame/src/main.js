@@ -4,20 +4,33 @@ const BLOCK_COLORS = ["red", "green", "yellow", "blue", "purple"];
 const positions = [200, 450, 700, 950, 1200]
 
 const k = kaboom({
-    background: [ 0, 0, 255, ],
+    background: [ 100, 227, 255, ],
 })
 
 const screenWidth = width();
 const screenHeight = height();
 
-k.loadSprite("bean", "sprites/bean.png")
+k.loadSprite("bean", "sprites/arrow2.png")
 k.loadSprite("platfrom", "sprites/Platform.png")
+k.loadSprite("background", "sprites/bg-gmae.png")
+loadFont("frogblock", "fonts/LilMrkr.otf")
+k.loadSprite("arrow-red", "sprites/arrow-red.png"),
+k.loadSprite("arrow-green", "sprites/arrow-green.png"),
+k.loadSprite("arrow-yellow", "sprites/arrow-yellow.png"),
+k.loadSprite("arrow-blue", "sprites/arrow-blue.png"),
+k.loadSprite("arrow-pink", "sprites/arrow-pink.png")
 
-
+const sprites = [
+	"arrow-red",
+	"arrow-green",
+	"arrow-yellow",
+	"arrow-blue",
+	"arrow-pink",
+]
 const beans = [
 	[
 		pos(200, 80),
-		sprite("bean"),
+		sprite("arrow-red"),
 		area(),
 		move(90, 200),
 		// offscreen({ destroy: true }),
@@ -26,7 +39,7 @@ const beans = [
 	],
 	[
 		pos(450, 80),
-		sprite("bean"),
+		sprite("arrow-green"),
 		area(),
 		move(90, 200),
 		// offscreen({ destroy: true }),
@@ -35,7 +48,7 @@ const beans = [
 	],
 	[
 		pos(700, 80),
-		sprite("bean"),
+		sprite("arrow-yellow"),
 		area(),
 		move(90, 200),
 		// offscreen({ destroy: true }),
@@ -44,7 +57,7 @@ const beans = [
 	],
 	[
 		pos(950, 80),
-		sprite("bean"),
+		sprite("arrow-blue"),
 		area(),
 		move(90, 200),
 		// offscreen({ destroy: true }),
@@ -53,7 +66,7 @@ const beans = [
 	], 
 	[
 		pos(1200, 80),
-		sprite("bean"),
+		sprite("arrow-pink"),
 		area(),
 		move(90, 200),
 		// offscreen({ destroy: true }),
@@ -80,7 +93,7 @@ function spawnBean() {
 	add(
 		[
 			pos(positions[rand_choice], 80),
-			sprite("bean"),
+			sprite(sprites[rand_choice]),
 			area(),
 			move(90, 200),
 			"bean",
@@ -99,9 +112,34 @@ scene("game", () => {
 	let canPressFour = false;
 	let canPressFive = false;
 
+  	// let background = add([
+    // sprite("background"),
+    // // Make the background centered on the screen
+    // pos(width() / 2, height() / 2),
+    // // Allow the background to be scaled
+    // scale(1),
+    // // Keep the background position fixed even when the camera moves
+    // fixed()
+	// ]);
+	// // Scale the background to cover the screen
+	// background.scaleTo(Math.max(
+	// 	width() / 900
+	// 	height() /900
+	// ));
+
+	// text("ohhi", {
+    //     size: 48, // 48 pixels tall
+    //     width: 320, // it'll wrap to next line when width exceeds this value
+    //     font: "sans-serif", // specify any font you loaded or browser built-in
+    // }),
+
 	const scoreLabel = add([
-    	text("score: " + score),
-    	pos(24, 24)
+		pos(24, 24),
+		text("score: " + score, {
+			size: 64, // 48 pixels tall
+			font: "frogblock", // specify any font you loaded or browser built-in
+		}),
+		color(0, 0, 0),
 	]);
 	// loop(1, () => {
 	// 	// add bean object
